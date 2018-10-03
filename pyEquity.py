@@ -84,6 +84,15 @@ def specifyFeature(data, feature):
     return new_data
 
 
+def adjustColumns():
+    data.columns.set_levels(['adj_open', 'adj_high', 'adj_low', 'adj_close', 'adj_volume', 'dividends', 'unadj_close', 'lastupdated'], 
+                       level = 0, inplace = True)
+
+def removeCheapEquity(data, threshold = 5):
+    tmp = (data['adj_close'].iloc[-1] < threshold)
+    tmp2 = data.columns.levels[1][[np.where(tmp)]]
+    return data.drop(tmp2[0], level = 1, axis = 1).shape
+
 
 
 
