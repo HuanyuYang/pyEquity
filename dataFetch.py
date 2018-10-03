@@ -15,5 +15,14 @@ def getEquityData(tickers, qopts = { 'columns': ['ticker', 'date', 'adj_close', 
                             api_key='KB7ZyJpPrzE1zPpBX7xu')
     data = data.set_index('date')
     data = new[::-1]
+    new = new.pivot(columns='ticker')
+    return new
+
+def getEquityDataFromCSV(path):
+    data = pd.read_csv(path) 
+    new = data.set_index('date')
+    new = new[::-1]
+    new = new.pivot(columns='ticker')
+
     return new
 
